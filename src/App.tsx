@@ -1,7 +1,9 @@
+import DashboardPage from "./pages/dashboard/DashboardPage";
+
 function App() {
     return (
         <>
-            <h1>Weather</h1>
+            <DashboardPage />
         </>
     );
 }
