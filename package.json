@@ -7,14 +7,18 @@
         "dev": "vite",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "gen-locationforecast-client": "openapi-ts -f openapi-ts.config.locationforecast.ts",
+        "gen-sunrise-client": "openapi-ts -f openapi-ts.config.sunrise.ts"
     },
     "dependencies": {
+        "@hey-api/client-fetch": "^0.4.2",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },
     "devDependencies": {
         "@eslint/js": "^9.13.0",
+        "@hey-api/openapi-ts": "^0.54.1",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.1",
         "@vitejs/plugin-react": "^4.3.3",
