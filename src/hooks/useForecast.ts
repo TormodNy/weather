@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { GetCompactResponse } from "../clients/locationforecast";
+import { Forecast } from "../clients/locationforecast";
 import { LocationForecastService } from "../clients";
 
 export function useForecast(latitude: number, longitude: number) {
-    const [forecast, setForecast] = useState<GetCompactResponse | null>(null);
+    const [forecast, setForecast] = useState<Forecast | null>(null);
 
     const fetchLocationForecast = useCallback(async () => {
         const { data } = await LocationForecastService.getCompact({
@@ -13,7 +13,7 @@ export function useForecast(latitude: number, longitude: number) {
             },
         });
         if (data) {
-            setForecast(data);
+            setForecast(data.properties);
         }
     }, [latitude, longitude]);
 

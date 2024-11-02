@@ -1,20 +1,12 @@
-import { GetCompactResponse } from "../../../clients/locationforecast";
+import { Forecast } from "../../../clients/locationforecast";
 import { WEATHER_ICON_MAP } from "../../../utils/weatherIconMap";
 
 interface TemperatureViewProps {
-    forecast: GetCompactResponse;
+    forecast: Forecast;
 }
 
 function TemperatureView({ forecast }: TemperatureViewProps) {
-    const timeseries = forecast?.properties.timeseries;
-
-    if (!timeseries) {
-        return (
-            <p>
-                <i>Weather timeseries data is not available.</i>
-            </p>
-        );
-    }
+    const timeseries = forecast.timeseries;
 
     const symbolCode = timeseries[0]?.data.next_1_hours?.summary.symbol_code;
     const weatherDescription = symbolCode

@@ -11,11 +11,14 @@ export interface LocationBoxProps {
 function LocationBox({ locationName, latitude, longitude }: LocationBoxProps) {
     const forecast = useForecast(latitude, longitude);
     const temperature =
-        forecast?.properties.timeseries[0]?.data.instant.details
-            ?.air_temperature;
+        forecast?.timeseries[0]?.data.instant.details?.air_temperature;
 
     return (
-        <Link to={"/details"} state={{ locationName, latitude, longitude }} className="w-full">
+        <Link
+            to={"/details"}
+            state={{ locationName, latitude, longitude }}
+            className="w-full"
+        >
             <DashboardBox>
                 <span>{locationName}</span>
                 <span>
