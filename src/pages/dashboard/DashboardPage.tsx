@@ -4,7 +4,7 @@ import LocationBox from "./LocationBox";
 function DashboardPage() {
     return (
         <BasePage heading="Dashboard">
-            <section className="flex flex-row gap-8 w-full justify-center">
+            <section className="flex lg:flex-row flex-col gap-8 w-full justify-center items-center">
                 <LocationBox
                     locationName="London"
                     latitude={51.509865}
