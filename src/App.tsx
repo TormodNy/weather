@@ -1,5 +1,5 @@
+import { Outlet } from "react-router-dom";
 import { locationForecastClient, sunriseClient } from "./clients";
-import DashboardPage from "./pages/dashboard/DashboardPage";
 
 locationForecastClient.setConfig({
     baseUrl: "https://api.met.no/weatherapi/locationforecast/2.0",
@@ -10,11 +10,7 @@ sunriseClient.setConfig({
 });
 
 function App() {
-    return (
-        <>
-            <DashboardPage />
-        </>
-    );
+    return <Outlet />;
 }
 
 export default App;
