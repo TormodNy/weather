@@ -1,14 +1,21 @@
 import { useLocation } from "react-router-dom";
 import BasePage from "../base/BasePage";
+import TemperatureView from "./TemperatureView";
 import { LocationBoxProps } from "../dashboard/LocationBox";
+import { useForecast } from "../../../hooks/useForecast";
 
 function DetailsPage() {
     const { state } = useLocation();
     const { locationName, latitude, longitude } = state as LocationBoxProps;
+    const forecast = useForecast(latitude, longitude);
 
     return (
         <BasePage heading={locationName} backTo="/">
-            <section className="flex lg:flex-row flex-col gap-8 w-full justify-center items-center"></section>
+            {forecast ? (
+                <TemperatureView forecast={forecast} />
+            ) : (
+                <p>Forecast could not be fetched.</p>
+            )}
         </BasePage>
     );
 }
