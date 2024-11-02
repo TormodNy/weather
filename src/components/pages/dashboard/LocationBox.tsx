@@ -1,7 +1,8 @@
 import DashboardBox from "./DashboardBox";
 import { useForecast } from "../../../hooks/useForecast";
+import { Link } from "react-router-dom";
 
-interface LocationBoxProps {
+export interface LocationBoxProps {
     locationName: string;
     latitude: number;
     longitude: number;
@@ -14,10 +15,14 @@ function LocationBox({ locationName, latitude, longitude }: LocationBoxProps) {
             ?.air_temperature;
 
     return (
-        <DashboardBox>
-            <span>{locationName}</span>
-            <span>{temperature !== undefined ? `${temperature}°C` : "-"}</span>
-        </DashboardBox>
+        <Link to={"/details"} state={{ locationName, latitude, longitude }} className="w-full">
+            <DashboardBox>
+                <span>{locationName}</span>
+                <span>
+                    {temperature !== undefined ? `${temperature}°C` : "-"}
+                </span>
+            </DashboardBox>
+        </Link>
     );
 }
 
