@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { LocationForecastService } from "../../clients";
-import { GetCompactResponse } from "../../clients/locationforecast";
+import { LocationForecastService } from "../../../clients";
+import { GetCompactResponse } from "../../../clients/locationforecast";
 import DashboardBox from "./DashboardBox";
 
 interface LocationBoxProps {
