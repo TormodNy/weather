@@ -1,10 +1,12 @@
 import BasePage from "../base/BasePage";
 import LocationBox from "./LocationBox";
+import MyLocationBox from "./MyLocationBox";
 
 function DashboardPage() {
     return (
         <BasePage heading="Dashboard">
             <section className="flex lg:flex-row flex-col gap-8 w-full justify-center items-center">
+                <MyLocationBox />
                 <LocationBox
                     locationName="London"
                     latitude={51.509865}

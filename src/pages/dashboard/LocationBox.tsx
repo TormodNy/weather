@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { LocationForecastService } from "../../clients";
 import { GetCompactResponse } from "../../clients/locationforecast";
+import DashboardBox from "./DashboardBox";
 
 interface LocationBoxProps {
     locationName: string;
@@ -31,10 +32,10 @@ function LocationBox({ locationName, latitude, longitude }: LocationBoxProps) {
     }, [fetchLocationForecast]);
 
     return (
-        <button className="flex justify-between bg-gray-900 p-4 gap-2 text-xl max-w-96 w-full">
+        <DashboardBox>
             <span>{locationName}</span>
             <span>{temperature !== undefined ? `${temperature}°C` : "-"}</span>
-        </button>
+        </DashboardBox>
     );
 }
 
