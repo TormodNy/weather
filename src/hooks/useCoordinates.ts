@@ -1,20 +1,38 @@
-interface Coordinates {
-    latitude: number;
-    longitude: number;
-}
+import { useContext } from "react";
+import {
+    CoordinatesContext,
+    CoordinatesState,
+} from "../state/coordinatesContext";
 
-let coordinates: Coordinates | null = null;
-if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(
-        ({ coords: { latitude, longitude } }) => {
-            coordinates = {
-                latitude,
-                longitude,
-            };
-        },
-    );
-}
+export function useCoordinates(): [CoordinatesState, () => void] {
+    const [coordinatesState, setCoordinatesState] =
+        useContext(CoordinatesContext);
 
-export function useCoordinates(): Coordinates | null {
-    return coordinates;
+    function getUserCoordinates() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                ({ coords: { latitude, longitude } }) => {
+                    setCoordinatesState({
+                        coordinates: {
+                            latitude,
+                            longitude,
+                        },
+                        error: null,
+                    });
+                },
+                (error) =>
+                    setCoordinatesState({
+                        coordinates: null,
+                        error: error.message,
+                    }),
+            );
+        } else {
+            setCoordinatesState({
+                coordinates: null,
+                error: "Cannot find user location",
+            });
+        }
+    }
+
+    return [coordinatesState, getUserCoordinates];
 }

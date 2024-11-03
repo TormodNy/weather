@@ -3,9 +3,14 @@ import DashboardBox from "./DashboardBox";
 import LocationBox from "./LocationBox";
 
 function MyLocationBox() {
-    const coordinates = useCoordinates();
-    if (!coordinates) {
-        return <DashboardBox>Cannot get user location</DashboardBox>;
+    const [{ coordinates, error }, getUserCoordinates] = useCoordinates();
+
+    if (!coordinates || error) {
+        return (
+            <DashboardBox onClick={getUserCoordinates}>
+                {error ?? "Click to get location"}
+            </DashboardBox>
+        );
     }
     const { latitude, longitude } = coordinates;
 

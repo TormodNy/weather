@@ -2,6 +2,11 @@ import { Outlet } from "react-router-dom";
 import { locationForecastClient, sunriseClient } from "./clients";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
+import { useState } from "react";
+import {
+    CoordinatesContext,
+    CoordinatesState,
+} from "./state/coordinatesContext";
 
 locationForecastClient.setConfig({
     baseUrl: "https://api.met.no/weatherapi/locationforecast/2.0",
@@ -18,9 +23,18 @@ const darkTheme = createTheme({
 });
 
 function App() {
+    const [coordinatesState, setCoordinatesState] = useState<CoordinatesState>({
+        coordinates: null,
+        error: null,
+    });
+
     return (
         <ThemeProvider theme={darkTheme}>
-            <Outlet />
+            <CoordinatesContext.Provider
+                value={[coordinatesState, setCoordinatesState]}
+            >
+                <Outlet />
+            </CoordinatesContext.Provider>
         </ThemeProvider>
     );
 }
