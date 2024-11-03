@@ -5,7 +5,7 @@ import MyLocationBox from "./MyLocationBox";
 function DashboardPage() {
     return (
         <BasePage heading="Dashboard">
-            <section className="flex lg:flex-row flex-col gap-8 w-full justify-center items-center">
+            <section className="flex landscape:flex-row flex-col gap-8 w-full justify-center items-center">
                 <MyLocationBox />
                 <LocationBox
                     locationName="London"

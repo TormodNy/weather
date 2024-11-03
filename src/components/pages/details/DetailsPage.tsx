@@ -13,7 +13,7 @@ function DetailsPage() {
     return (
         <BasePage heading={locationName} backTo="/">
             {forecast ? (
-                <div className="w-full h-full flex xl:flex-row flex-col justify-center items-center">
+                <div className="w-full h-full grow flex landscape:flex-row flex-col justify-around items-center gap-8">
                     <TemperatureView forecast={forecast} />
                     <WeatherGrid
                         forecast={forecast}

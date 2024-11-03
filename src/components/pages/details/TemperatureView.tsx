@@ -32,18 +32,18 @@ function TemperatureView({ forecast }: TemperatureViewProps) {
 
     return (
         <section className="flex flex-col gap-4 items-center">
-            <p className="text-3xl">{weatherDescription}</p>
+            <p className="text-4xl">{weatherDescription}</p>
             <p className="font-bold text-8xl">
                 {currentTemperature !== undefined
                     ? `${currentTemperature}°C`
                     : "-"}
             </p>
             <span className="flex gap-4">
-                <p className="text-2xl">
+                <p className="text-3xl">
                     H:{" "}
                     {maxTemperature !== -Infinity ? `${maxTemperature}°C` : "-"}
                 </p>
-                <p className="text-2xl">
+                <p className="text-3xl">
                     L:{" "}
                     {minTemperature !== Infinity ? `${minTemperature}°C` : "-"}
                 </p>

@@ -17,7 +17,7 @@ function LocationBox({ locationName, latitude, longitude }: LocationBoxProps) {
         <Link
             to={"/details"}
             state={{ locationName, latitude, longitude }}
-            className="w-full"
+            className="max-w-96 w-full"
         >
             <DashboardBox>
                 <span>{locationName}</span>
