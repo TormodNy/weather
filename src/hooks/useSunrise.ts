@@ -1,12 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { SunriseData, SunriseService } from "../clients";
-
-function getTimezoneOffsetString() {
-    const timezoneOffset = new Date().getTimezoneOffset() / 60;
-    const sign = timezoneOffset < 0 ? "+" : "-";
-    const paddedOffset = Math.abs(timezoneOffset).toString().padStart(2, "0");
-    return `${sign}${paddedOffset}:00`;
-}
+import { getTimezoneOffsetString } from "../utils/timeFormat";
 
 interface SunriseState {
     sunriseData: SunriseData | null;

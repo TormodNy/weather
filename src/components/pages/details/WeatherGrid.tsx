@@ -1,10 +1,7 @@
 import { Forecast } from "../../../clients/locationforecast";
 import { useSunrise } from "../../../hooks/useSunrise";
+import { getTimeFromDateString } from "../../../utils/timeFormat";
 import WeatherGridCell from "./WeatherGridCell";
-
-function getTimeFromDateString(dateString: string) {
-    return dateString.split("T")[1].split("+")[0];
-}
 
 interface WeatherGridProps {
     forecast: Forecast;
