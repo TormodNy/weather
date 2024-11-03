@@ -11,7 +11,7 @@ interface ForecastState {
 export function useForecast(latitude: number, longitude: number) {
     const [forecastState, setForecastState] = useState<ForecastState>({
         forecast: null,
-        isLoading: false,
+        isLoading: true,
         error: null,
     });
 

@@ -11,7 +11,7 @@ interface SunriseState {
 export function useSunrise(latitude: number, longitude: number) {
     const [sunriseState, setSunriseState] = useState<SunriseState>({
         sunriseData: null,
-        isLoading: false,
+        isLoading: true,
         error: null,
     });
 
