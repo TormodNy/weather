@@ -8,20 +8,56 @@ function getTimezoneOffsetString() {
     return `${sign}${paddedOffset}:00`;
 }
 
+interface SunriseState {
+    sunriseData: SunriseData | null;
+    isLoading: boolean;
+    error: string | null;
+}
+
 export function useSunrise(latitude: number, longitude: number) {
-    const [sunrise, setSunrise] = useState<SunriseData | null>(null);
+    const [sunriseState, setSunriseState] = useState<SunriseState>({
+        sunriseData: null,
+        isLoading: false,
+        error: null,
+    });
 
     const fetchSunrise = useCallback(async () => {
-        const { data } = await SunriseService.getSun({
-            query: {
-                lat: latitude,
-                lon: longitude,
-                offset: getTimezoneOffsetString(),
-            },
+        setSunriseState({
+            sunriseData: null,
+            isLoading: true,
+            error: null,
         });
-        if (data) {
-            // Data is not a string here as the client says
-            setSunrise(data as unknown as SunriseData);
+
+        try {
+            const { data } = await SunriseService.getSun({
+                query: {
+                    lat: latitude,
+                    lon: longitude,
+                    offset: getTimezoneOffsetString(),
+                },
+            });
+            if (data) {
+                // Data is not a string here as the client says
+                setSunriseState({
+                    sunriseData: data as unknown as SunriseData,
+                    isLoading: false,
+                    error: null,
+                });
+            } else {
+                setSunriseState({
+                    sunriseData: null,
+                    isLoading: false,
+                    error: "Sunrise data is empty",
+                });
+            }
+        } catch (error: unknown) {
+            console.error(error);
+
+            setSunriseState({
+                sunriseData: null,
+                isLoading: false,
+                error: "Could not fetch sunrise data",
+            });
         }
     }, [latitude, longitude]);
 
@@ -29,5 +65,5 @@ export function useSunrise(latitude: number, longitude: number) {
         fetchSunrise();
     }, [fetchSunrise]);
 
-    return sunrise;
+    return sunriseState;
 }

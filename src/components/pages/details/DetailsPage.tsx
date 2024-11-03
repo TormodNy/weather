@@ -4,11 +4,12 @@ import TemperatureView from "./TemperatureView";
 import { LocationBoxProps } from "../dashboard/LocationBox";
 import { useForecast } from "../../../hooks/useForecast";
 import WeatherGrid from "./WeatherGrid";
+import { CircularProgress } from "@mui/material";
 
 function DetailsPage() {
     const { state } = useLocation();
     const { locationName, latitude, longitude } = state as LocationBoxProps;
-    const forecast = useForecast(latitude, longitude);
+    const { forecast, isLoading, error } = useForecast(latitude, longitude);
 
     return (
         <BasePage heading={locationName} backTo="/">
@@ -21,8 +22,10 @@ function DetailsPage() {
                         longitude={longitude}
                     />
                 </div>
+            ) : isLoading ? (
+                <CircularProgress />
             ) : (
-                <p>Forecast could not be fetched.</p>
+                <p>{error ?? "Forecast could not be fetched."}</p>
             )}
         </BasePage>
     );

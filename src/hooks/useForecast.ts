@@ -2,18 +2,50 @@ import { useCallback, useEffect, useState } from "react";
 import { Forecast } from "../clients/locationforecast";
 import { LocationForecastService } from "../clients";
 
+interface ForecastState {
+    forecast: Forecast | null;
+    isLoading: boolean;
+    error: string | null;
+}
+
 export function useForecast(latitude: number, longitude: number) {
-    const [forecast, setForecast] = useState<Forecast | null>(null);
+    const [forecastState, setForecastState] = useState<ForecastState>({
+        forecast: null,
+        isLoading: false,
+        error: null,
+    });
 
     const fetchLocationForecast = useCallback(async () => {
-        const { data } = await LocationForecastService.getCompact({
-            query: {
-                lat: latitude,
-                lon: longitude,
-            },
-        });
-        if (data) {
-            setForecast(data.properties);
+        setForecastState({ forecast: null, isLoading: true, error: null });
+
+        try {
+            const { data } = await LocationForecastService.getCompact({
+                query: {
+                    lat: latitude,
+                    lon: longitude,
+                },
+            });
+            if (data) {
+                setForecastState({
+                    forecast: data.properties,
+                    isLoading: false,
+                    error: null,
+                });
+            } else {
+                setForecastState({
+                    forecast: null,
+                    isLoading: false,
+                    error: "Forecast data is empty",
+                });
+            }
+        } catch (error: unknown) {
+            console.error(error);
+
+            setForecastState({
+                forecast: null,
+                isLoading: false,
+                error: "Could not fetch forecast data",
+            });
         }
     }, [latitude, longitude]);
 
@@ -21,5 +53,5 @@ export function useForecast(latitude: number, longitude: number) {
         fetchLocationForecast();
     }, [fetchLocationForecast]);
 
-    return forecast;
+    return forecastState;
 }
