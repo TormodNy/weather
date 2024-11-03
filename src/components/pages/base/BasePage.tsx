@@ -11,7 +11,9 @@ function BasePage({ heading, backTo, children }: BasePageProps) {
     return (
         <main className="flex flex-col h-full">
             <Header title={heading} backTo={backTo}></Header>
-            <div className="grow p-8 flex flex-col items-center">{children}</div>
+            <div className="grow p-8 flex flex-col items-center">
+                {children}
+            </div>
         </main>
     );
 }
