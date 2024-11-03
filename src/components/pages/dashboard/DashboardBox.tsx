@@ -6,7 +6,7 @@ interface DashboardBoxProps {
 
 function DashboardBox({ children }: DashboardBoxProps) {
     return (
-        <button className="flex justify-between bg-gray-900 p-4 gap-2 text-xl max-w-96 w-full">
+        <button className="flex justify-between bg-gray-900 p-4 gap-2 text-xl max-w-96 w-full rounded-md hover:bg-gray-700 active:bg-gray-500">
             {children}
         </button>
     );
